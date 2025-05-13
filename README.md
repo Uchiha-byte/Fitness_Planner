@@ -54,7 +54,7 @@ zfit/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/uchiha_byte/zfit.git
+git clone https://github.com/uchiha_byte/Fitness_Planner.git
 cd zfit
 ```
 
