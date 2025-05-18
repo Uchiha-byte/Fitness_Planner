@@ -1,7 +1,6 @@
 import numpy as np
 from PIL import Image
 import io
-import tensorflow as tf
 import openai
 from datetime import datetime, timedelta
 import pandas as pd
@@ -95,22 +94,21 @@ def generate_ai_response(prompt, context=None):
         return f"I apologize, but I'm having trouble generating a response right now. Error: {str(e)}"
 
 def preprocess_food_image(image):
-    """Preprocess food image for model prediction"""
-    # Resize image to expected dimensions
+    """Preprocess food image for basic analysis"""
+    # Resize image to standard dimensions
     target_size = (224, 224)
     image = image.resize(target_size)
     
-    # Convert to array and preprocess
+    # Convert to array and normalize
     img_array = np.array(image)
     img_array = img_array / 255.0  # Normalize pixel values
-    img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
     
     return img_array
 
-def estimate_nutrition(predictions, confidence_threshold=0.5):
-    """Estimate nutrition facts based on model predictions"""
-    # This is a placeholder function that would normally use a real model
-    # and database of nutritional information
+def estimate_nutrition(image):
+    """Estimate nutrition facts (placeholder function)"""
+    # This is a placeholder function that returns sample data
+    # In a real implementation, this would use a proper food recognition model
     sample_nutrition = {
         'calories': 300,
         'protein': 15,
