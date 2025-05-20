@@ -194,3 +194,5 @@ elif st.session_state.nav_selection == "AI Coach":
     ai_coach_app()
 elif st.session_state.nav_selection == "Food Vision":
     food_vision_app() 
+
+
