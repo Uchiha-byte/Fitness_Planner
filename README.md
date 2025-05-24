@@ -70,13 +70,32 @@ ZFIT/
   - Detailed form instructions
   - Muscle group targeting
 
-### 🤖 AI Features
+### 🤖 Enhanced AI Coach (Gemini API)
 
-- Real-time form analysis
-- Personalized workout adjustments
-- Nutrition optimization
-- Progress prediction
-- Smart goal recommendations
+- **Strict, No-Nonsense Chat**
+  - Direct, actionable, and concise advice
+  - Responses formatted as bold bullet points, each on a new line
+  - 80-120 word limit for clarity and focus
+  - Strong, motivational, and evidence-based language
+
+- **Quick Assist Buttons**
+  - Instant access to expert guidance on:
+    - Form Check
+    - Nutrition Tips
+    - Recovery Protocol
+    - Motivation
+    - Injury Prevention
+    - Breaking Plateaus
+  - Each output is organized in clear, bold points for easy reading
+
+- **Personalized Guidance**
+  - Considers your workout history and nutrition data
+  - Suggests the best workout plan for your goals
+  - Efficient, point-based chat for all fitness and nutrition questions
+
+- **Modern Conversational UI**
+  - Chat with your AI Coach in a natural, interactive way
+  - All responses are formatted for maximum readability and actionability
 
 ## 🚀 Getting Started
 
@@ -125,7 +144,7 @@ streamlit run app.py
 
 - **Frontend**: Streamlit
 - **Backend**: Python
-- **AI/ML**: TensorFlow, OpenAI
+- **AI/ML**: Gemini API, TensorFlow, OpenAI
 - **Data Processing**: Pandas, NumPy
 - **Visualization**: Plotly
 - **Computer Vision**: OpenCV
@@ -164,22 +183,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - OpenAI for AI capabilities
+- Google Gemini API for advanced AI chat
 - Streamlit for the amazing framework
 - Our amazing contributors and community
-
-The application is currently undergoing modularization. The following modules have been implemented:
-- Home page
-- Exercise Library
-
-The following modules are under development:
-- AI Coach
-- Food Vision
 
 ## 🔄 Version History
 
 - v2.0.0 (Current)
-  - AI integration
-  - Enhanced UI/UX
+  - Enhanced AI Coach with Gemini API
+  - Quick Assist and strict, point-based chat
+  - Improved UI/UX
   - New features added
 - v1.0.0
   - Initial release
@@ -187,6 +200,6 @@ The following modules are under development:
 ---
 
 <div align="center">
-    <p>Made by uchiha_byte</p>
-    <p>© 2025 ZFIT. All rights reserved.</p>
+    <p>Made with ❤️ by the ZFIT Team</p>
+    <p>© 2024 ZFIT. All rights reserved.</p>
 </div>
