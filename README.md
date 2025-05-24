@@ -109,7 +109,7 @@ ZFIT/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/zfit.git
+git clone https://github.com/uchiha_byte/zfit.git
 cd zfit
 ```
 
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 4. Set up environment variables:
 ```bash
 # Create .env file and add your configurations
-cp .env.example .env
+cp .env
 ```
 
 5. Run the application:
