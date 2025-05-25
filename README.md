@@ -17,6 +17,7 @@ ZFIT/
 ├── config.py             # Configuration settings
 ├── requirements.txt      # Project dependencies
 ├── README.md            # Project documentation
+├── .env                 # Environment variables (API keys)
 ├── fitness_data.db      # SQLite database
 │
 ├── pages/               # Application pages
@@ -25,7 +26,7 @@ ZFIT/
 │   ├── workout_planner.py
 │   ├── nutrition_tracker.py
 │   ├── ai_coach.py
-│   └── food_vision.py
+│   └── food_vision.py   # Food analysis using Gemini Vision
 │
 ├── static/              # Static assets
 │   ├── css/
@@ -34,7 +35,8 @@ ZFIT/
 │
 ├── utils/              # Utility functions
 │   ├── __init__.py
-│   └── helpers.py
+│   ├── helpers.py
+│   └── ai_helper.py    # AI integration utilities
 │
 ├── data/               # Data storage
 │   ├── exercises/     # Exercise data
@@ -70,13 +72,25 @@ ZFIT/
   - Detailed form instructions
   - Muscle group targeting
 
-### 🤖 Enhanced AI Coach (Gemini API)
+### 🤖 Enhanced AI Features
 
-- **Strict, No-Nonsense Chat**
-  - Direct, actionable, and concise advice
-  - Responses formatted as bold bullet points, each on a new line
-  - 80-120 word limit for clarity and focus
-  - Strong, motivational, and evidence-based language
+- **Food Vision Analysis**
+  - Upload food images or capture with camera
+  - Instant nutritional analysis using Gemini 1.5 Flash
+  - Detailed breakdown of:
+    - Food identification
+    - Calorie content
+    - Macronutrients (carbs, proteins, fats)
+    - Micronutrients
+    - Health benefits
+  - Real-time image processing
+  - User-friendly interface with image preview
+
+- **AI Coach (Gemini API)**
+  - Direct, actionable advice
+  - Responses formatted as bold bullet points
+  - 80-120 word limit for clarity
+  - Strong, motivational language
 
 - **Quick Assist Buttons**
   - Instant access to expert guidance on:
@@ -86,16 +100,6 @@ ZFIT/
     - Motivation
     - Injury Prevention
     - Breaking Plateaus
-  - Each output is organized in clear, bold points for easy reading
-
-- **Personalized Guidance**
-  - Considers your workout history and nutrition data
-  - Suggests the best workout plan for your goals
-  - Efficient, point-based chat for all fitness and nutrition questions
-
-- **Modern Conversational UI**
-  - Chat with your AI Coach in a natural, interactive way
-  - All responses are formatted for maximum readability and actionability
 
 ## 🚀 Getting Started
 
@@ -104,6 +108,7 @@ ZFIT/
 - Python 3.8 or higher
 - pip package manager
 - Virtual environment (recommended)
+- Gemini API key
 
 ### Installation
 
@@ -131,8 +136,8 @@ pip install -r requirements.txt
 
 4. Set up environment variables:
 ```bash
-# Create .env file and add your configurations
-cp .env
+# Create .env file and add your Gemini API key
+GEMINI_API_KEY=your-gemini-api-key-here
 ```
 
 5. Run the application:
@@ -144,7 +149,7 @@ streamlit run app.py
 
 - **Frontend**: Streamlit
 - **Backend**: Python
-- **AI/ML**: Gemini API, TensorFlow, OpenAI
+- **AI/ML**: Google Gemini API (1.5 Flash)
 - **Data Processing**: Pandas, NumPy
 - **Visualization**: Plotly
 - **Computer Vision**: OpenCV
@@ -182,17 +187,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- OpenAI for AI capabilities
-- Google Gemini API for advanced AI chat
+- Google Gemini API for advanced AI capabilities
 - Streamlit for the amazing framework
 - Our amazing contributors and community
 
 ## 🔄 Version History
 
-- v2.0.0 (Current)
+- v2.1.0 (Current)
+  - Added Food Vision feature with Gemini 1.5 Flash
+  - Enhanced AI Coach with Gemini API
+  - Improved UI/UX
+  - New features added
+- v2.0.0
   - Enhanced AI Coach with Gemini API
   - Quick Assist and strict, point-based chat
   - Improved UI/UX
-  - New features added
 - v1.0.0
   - Initial release
