@@ -1,129 +1,76 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
+import google.generativeai as genai
 from PIL import Image
+import os
+from dotenv import load_dotenv
 import io
-from utils import estimate_nutrition
-from config import GEMINI_API_KEY
+
+# Load environment variables
+load_dotenv()
+
+# Configure Gemini API
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    st.error("Please set your GEMINI_API_KEY in the .env file")
+    st.stop()
+
+genai.configure(api_key=GEMINI_API_KEY)
+
+def analyze_food_image(image):
+    """Analyze food image using Gemini 1.5 Flash"""
+    try:
+        # Initialize Gemini 1.5 Flash model
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        
+        # Prepare the prompt
+        prompt = """Analyze this food image and provide the following information in a structured format:
+        1. Name of the food
+        2. Estimated calories per serving
+        3. Macronutrients (in grams):
+           - Carbohydrates
+           - Proteins
+           - Fats
+        4. Key micronutrients
+        5. Health benefits
+        Please be as accurate as possible with the nutritional information."""
+        
+        # Generate response
+        response = model.generate_content([prompt, image])
+        return response.text
+    except Exception as e:
+        return f"Error analyzing image: {str(e)}"
 
 def app():
-    st.title("Food Vision")
+    st.title("🍽️ Food Vision Analysis")
+    st.write("Upload a food image or capture one using your camera to get detailed nutritional information.")
     
-    st.info("""
-    🚧 This feature is currently under maintenance.
+    # Create tabs for different input methods
+    tab1, tab2 = st.tabs(["📤 Upload Image", "📸 Take Photo"])
     
-    The Food Vision feature requires TensorFlow, which is not yet compatible with Python 3.13.2.
-    We're working on making this feature available in a future update.
-    
-    In the meantime, you can still use all other features of the application!
-    """)
-    
-    st.markdown("""
-    ### Coming Soon:
-    - Food recognition from images
-    - Automatic nutrition facts calculation
-    - Quick and easy meal logging
-    - Integration with nutrition tracker
-    """)
-    
-    # Check if Gemini API key is configured
-    if GEMINI_API_KEY == "your-gemini-api-key-here":
-        st.error("Please configure your Gemini API key in config.py")
-        return
-    
-    # File uploader
-    uploaded_file = st.file_uploader("Upload a picture of your food", type=["jpg", "jpeg", "png"])
-    
-    if uploaded_file is not None:
-        try:
-            # Display the uploaded image
+    with tab1:
+        uploaded_file = st.file_uploader("Choose a food image...", type=["jpg", "jpeg", "png"])
+        if uploaded_file is not None:
             image = Image.open(uploaded_file)
-            st.image(image, caption="Uploaded Food Image", use_column_width=True)
+            st.image(image, caption="Uploaded Image", use_column_width=True)
             
-            # Add a button to trigger analysis
-            if st.button("Analyze Image"):
-                with st.spinner("Analyzing your food using Gemini Vision AI..."):
-                    try:
-                        # Get nutrition estimation
-                        nutrition_info = estimate_nutrition(image)
-                        
-                        # Display results in a nice format
-                        st.success("Analysis complete!")
-                        
-                        # Display confidence score
-                        confidence = min(max(nutrition_info['confidence'], 0), 1)  # Ensure between 0 and 1
-                        st.progress(confidence)
-                        st.caption(f"Confidence Score: {confidence*100:.1f}%")
-                        
-                        # Display nutrition information
-                        col1, col2 = st.columns(2)
-                        
-                        with col1:
-                            st.subheader("Estimated Nutrition Facts")
-                            st.write(f"**Calories:** {nutrition_info['calories']:.0f} kcal")
-                            st.write(f"**Protein:** {nutrition_info['protein']:.1f}g")
-                            st.write(f"**Carbs:** {nutrition_info['carbs']:.1f}g")
-                            st.write(f"**Fat:** {nutrition_info['fat']:.1f}g")
-                        
-                        with col2:
-                            # Add a pie chart for macronutrient distribution
-                            import plotly.express as px
-                            
-                            # Calculate total macros
-                            total_macros = (nutrition_info['protein'] * 4 + 
-                                          nutrition_info['carbs'] * 4 + 
-                                          nutrition_info['fat'] * 9)
-                            
-                            if total_macros > 0:
-                                # Calculate percentages
-                                protein_pct = (nutrition_info['protein'] * 4 / total_macros) * 100
-                                carbs_pct = (nutrition_info['carbs'] * 4 / total_macros) * 100
-                                fat_pct = (nutrition_info['fat'] * 9 / total_macros) * 100
-                                
-                                fig = px.pie(
-                                    values=[protein_pct, carbs_pct, fat_pct],
-                                    names=['Protein', 'Carbs', 'Fat'],
-                                    title='Macronutrient Distribution (%)'
-                                )
-                                st.plotly_chart(fig)
-                        
-                        # Add button to log this food
-                        if st.button("Add to Nutrition Log"):
-                            if "nutrition_logs" not in st.session_state:
-                                st.session_state.nutrition_logs = []
-                            
-                            # Add to nutrition log
-                            from datetime import datetime
-                            new_entry = {
-                                "food_name": "Food from image",
-                                "calories": nutrition_info['calories'],
-                                "protein": nutrition_info['protein'],
-                                "carbs": nutrition_info['carbs'],
-                                "fat": nutrition_info['fat'],
-                                "date": datetime.now().date(),
-                                "meal_type": "Other",
-                                "source": "Food Vision"
-                            }
-                            st.session_state.nutrition_logs.append(new_entry)
-                            st.success("Added to your nutrition log!")
-                    
-                    except Exception as e:
-                        st.error(f"Error analyzing image: {str(e)}")
-        except Exception as e:
-            st.error(f"Error processing image: {str(e)}")
-    else:
-        # Display instructions and tips
-        st.info("""
-        ### Tips for best results:
-        - Take photos in good lighting
-        - Center the food in the image
-        - Try to include all items in a single shot
-        - Avoid blurry images
-        - Include common objects for size reference
-        """)
-        
-        # Display sample images
-        st.subheader("Example Images")
-        st.write("Take clear, well-lit photos of your food for the most accurate nutrition estimates.")
+            if st.button("Analyze Uploaded Image"):
+                with st.spinner("Analyzing image..."):
+                    result = analyze_food_image(image)
+                    st.markdown("### Analysis Results")
+                    st.write(result)
+    
+    with tab2:
+        camera_input = st.camera_input("Take a photo of your food")
+        if camera_input is not None:
+            image = Image.open(camera_input)
+            st.image(image, caption="Captured Image", use_column_width=True)
+            
+            if st.button("Analyze Captured Image"):
+                with st.spinner("Analyzing image..."):
+                    result = analyze_food_image(image)
+                    st.markdown("### Analysis Results")
+                    st.write(result)
 
 if __name__ == "__main__":
     app() 

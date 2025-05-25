@@ -1,24 +1,25 @@
-import openai
-from config import OPENAI_API_KEY
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-# Configure OpenAI
-openai.api_key = OPENAI_API_KEY
+# Load environment variables
+load_dotenv()
 
-def generate_ai_response(prompt, context="", model="gpt-3.5-turbo"):
-    """Generate an AI response using OpenAI's API."""
+# Configure Gemini
+genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
+
+def generate_ai_response(prompt, context="", model="gemini-pro"):
+    """Generate an AI response using Gemini API."""
     try:
-        messages = [
-            {"role": "system", "content": context},
-            {"role": "user", "content": prompt}
-        ]
+        # Initialize the model
+        model = genai.GenerativeModel(model)
         
-        response = openai.ChatCompletion.create(
-            model=model,
-            messages=messages,
-            temperature=0.7,
-            max_tokens=500
-        )
+        # Combine context and prompt
+        full_prompt = f"{context}\n\n{prompt}" if context else prompt
         
-        return response.choices[0].message.content
+        # Generate response
+        response = model.generate_content(full_prompt)
+        
+        return response.text
     except Exception as e:
         raise Exception(f"Error generating AI response: {str(e)}") 

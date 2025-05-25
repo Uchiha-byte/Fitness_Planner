@@ -5,12 +5,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # API Keys
-OPENAI_API_KEY = "AIzaSyBLGT29OGmcA4dPxJAmHbbYPkZUScpWOI0"
-GEMINI_API_KEY = "AIzaSyBLGT29OGmcA4dPxJAmHbbYPkZUScpWOI0"
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 
 # Model Names
-GEMINI_MODEL = "gemini-pro"
-GEMINI_VISION_MODEL = "gemini-pro-vision"
+GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_VISION_MODEL = "gemini-1.5-flash"
 
 # Model configuration
 EXERCISE_DATA = {
