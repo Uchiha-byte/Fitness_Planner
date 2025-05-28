@@ -1,6 +1,6 @@
 
 <div align="center">
-    <h1>🏋️‍♂️ ZFIT</h1>
+    <h1>🏋️‍♂️ Fitness Planner</h1>
     <p><em>Transform Your Life with AI-Powered Fitness</em></p>
 </div>
 
