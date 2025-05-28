@@ -86,10 +86,9 @@ ZFIT/
   - Real-time image processing
   - User-friendly interface with image preview
 
-- **AI Coach (Gemini API)**
+- **AI Coach (Using Gemini API)**
   - Direct, actionable advice
   - Responses formatted as bold bullet points
-  - 80-120 word limit for clarity
   - Strong, motivational language
 
 - **Quick Assist Buttons**
@@ -114,8 +113,8 @@ ZFIT/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/uchiha_byte/zfit.git
-cd zfit
+git clone https://github.com/uchiha_byte/Fitness_Planner.git
+cd Fitness_Planner
 ```
 
 2. Create and activate virtual environment:
@@ -147,7 +146,7 @@ streamlit run app.py
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Streamlit
+- **Frontend**: Streamlit , Html And Css
 - **Backend**: Python
 - **AI/ML**: Google Gemini API (1.5 Flash)
 - **Data Processing**: Pandas, NumPy
@@ -303,8 +302,8 @@ ZFIT/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/uchiha_byte/zfit.git
-cd zfit
+git clone https://github.com/uchiha_byte/Fitness_Planner.git
+cd Fitness_Planner
 ```
 
 2. Create and activate virtual environment:
