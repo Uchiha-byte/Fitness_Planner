@@ -1,6 +1,4 @@
 
-- Goog# ZFIT - AI-Powered Fitness Tracker and Planner
-
 <div align="center">
     <h1>🏋️‍♂️ ZFIT</h1>
     <p><em>Transform Your Life with AI-Powered Fitness</em></p>
