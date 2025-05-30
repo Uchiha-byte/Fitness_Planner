@@ -65,51 +65,64 @@ a.st-emotion-cache-17db24x.edtmxes5 {
     box-shadow: 0 4px 12px rgba(76, 154, 255, 0.2);
 }
 
-/* ZFIT Logo Styling */
-.zfit-logo {
-    text-align: center;
-    padding: 2rem 1rem;
-    background: linear-gradient(135deg, rgba(76, 154, 255, 0.1), rgba(99, 179, 237, 0.1));
-    border-radius: 10px;
+/* Logo and Header Styling */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.zfit-title {
-    color: var(--primary-color);
-    font-size: 3.5em;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #4c9aff, #63b3ed);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(76, 154, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
     background: linear-gradient(45deg, #4c9aff, #63b3ed);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.zfit-slogan {
+.logo-tagline {
+    font-size: 14px;
     color: var(--secondary-text-color);
-    font-size: 1.2em;
-    margin: 0.5rem 0;
-    font-style: italic;
     font-weight: 500;
-}
-
-.zfit-divider {
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-    height: 3px;
-    margin: 1rem auto;
-    width: 80%;
-    border-radius: 2px;
-    opacity: 0.5;
-}
-
-.zfit-subtitle {
-    color: var(--secondary-text-color);
-    font-size: 0.9em;
-    margin-top: 0.5rem;
-    font-weight: 400;
+    letter-spacing: 0.5px;
 }
 
 /* Stats Container Styling */
@@ -513,4 +526,420 @@ ol, ul {
     color: var(--secondary-text-color);
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* Authentication Page Styles */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(76, 154, 255, 0.05), rgba(99, 179, 237, 0.05));
+}
+
+.auth-box {
+    text-align: center;
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(36, 42, 56, 0.9);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(76, 154, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-header {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.auth-title {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #4c9aff, #63b3ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-subtitle {
+    color: var(--secondary-text-color);
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.toggle-container {
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+    background: rgba(36, 42, 56, 0.5);
+    padding: 0.75rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(36, 42, 56, 0.5);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-section-title {
+    color: var(--secondary-text-color);
+    font-size: 1.2em;
+    font-weight: 500;
+    margin: 1.5rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Form Fields Styling */
+.stTextInput > div > div > input {
+    background-color: var(--secondary-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 2px rgba(76, 154, 255, 0.2) !important;
+    transform: translateY(-1px) !important;
+}
+
+.stNumberInput > div > div > input {
+    background-color: var(--secondary-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.stSelectbox > div > div > select {
+    background-color: var(--secondary-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Form Submit Button */
+.stButton > button[data-testid="stFormSubmitButton"] {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-hover)) !important;
+    color: white !important;
+    border: none !important;
+    padding: 1rem 2rem !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-top: 1.5rem !important;
+}
+
+.stButton > button[data-testid="stFormSubmitButton"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(76, 154, 255, 0.3) !important;
+}
+
+/* Toggle Buttons */
+.stButton > button {
+    background-color: var(--card-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+    padding: 0.75rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease !important;
+}
+
+.stButton > button[data-testid="baseButton-primary"] {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-hover)) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(76, 154, 255, 0.2) !important;
+}
+
+/* Help text styling */
+.stTextInput ~ small, .stNumberInput ~ small {
+    color: var(--secondary-text-color) !important;
+    font-size: 0.9rem !important;
+    margin-top: 0.25rem !important;
+    display: block !important;
+}
+
+/* Error messages */
+.stAlert {
+    background-color: transparent !important;
+    color: #ff4b4b !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+    margin: 1rem 0 !important;
+    font-weight: 500 !important;
+}
+
+.stAlert > div {
+    background-color: rgba(255, 75, 75, 0.1) !important;
+    border: 1px solid rgba(255, 75, 75, 0.2) !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+}
+
+/* Success messages */
+div[data-testid="stMarkdownContainer"] > div.success {
+    background-color: rgba(72, 187, 120, 0.1) !important;
+    border: 1px solid rgba(72, 187, 120, 0.2) !important;
+    color: #48bb78 !important;
+    padding: 0.75rem !important;
+    border-radius: 8px !important;
+    margin: 1rem 0 !important;
+    font-weight: 500 !important;
+}
+
+/* ZFIT Logo Styling */
+.zfit-logo {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, rgba(76, 154, 255, 0.1), rgba(99, 179, 237, 0.1));
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.zfit-title {
+    color: var(--primary-color);
+    font-size: 3.5em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(45deg, #4c9aff, #63b3ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+.zfit-slogan {
+    color: var(--secondary-text-color);
+    font-size: 1.2em;
+    margin: 0.5rem 0;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.zfit-divider {
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    height: 3px;
+    margin: 1rem auto;
+    width: 80%;
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+.zfit-subtitle {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    font-weight: 400;
+}
+
+/* User Profile Card */
+.user-profile-card {
+    background: var(--card-bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(76, 154, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-info-header {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.user-info-header h3 {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.user-goal {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    margin: 0.5rem 0 0 0;
+    font-style: italic;
+}
+
+.user-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(76, 154, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: var(--secondary-text-color);
+    font-size: 0.8em;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    color: var(--text-color);
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* Stats Dashboard */
+.stat-card {
+    background: var(--card-bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(76, 154, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.stat-card h3 {
+    color: var(--primary-color);
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.progress-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.progress-item {
+    margin-bottom: 0.5rem;
+}
+
+.progress-item .label {
+    display: block;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9em;
+}
+
+.progress-bar {
+    background: rgba(76, 154, 255, 0.1);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar .progress {
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.goal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(76, 154, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+    background: rgba(76, 154, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.goal-icon {
+    font-size: 1.2em;
+}
+
+.goal-text {
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+.summary-item {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(76, 154, 255, 0.05);
+    border-radius: 8px;
+}
+
+.summary-item .number {
+    display: block;
+    color: var(--primary-color);
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.summary-item .label {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+}
+
+/* Menu Section Title */
+.menu-section-title {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 } 
