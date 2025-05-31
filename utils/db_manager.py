@@ -13,6 +13,25 @@ class DatabaseManager:
     def create_tables(self):
         cursor = self.conn.cursor()
         
+        # Create users table
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT UNIQUE NOT NULL,
+            name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password TEXT NOT NULL,
+            height REAL,
+            weight REAL,
+            age INTEGER,
+            gender TEXT,
+            fitness_goal TEXT,
+            activity_level TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        ''')
+        
         # Create nutrition_logs table
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS nutrition_logs (
@@ -480,4 +499,4 @@ def get_user_stats(user_id):
     }
 
 # Reset and reinitialize the database when the module is imported
-reset_db() 
+# reset_db() 
