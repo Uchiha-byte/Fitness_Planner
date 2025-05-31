@@ -41,227 +41,398 @@ EXERCISE_DATA = {
             ]
         },
         "Bench Press": {
-            "description": "A compound exercise that builds chest strength and muscle mass using a barbell or dumbbells.",
+            "description": "A classic compound exercise that builds chest strength and size, also engaging shoulders and triceps.",
             "difficulty": "Intermediate",
             "target_muscles": ["Chest", "Shoulders", "Triceps"],
-            "video_url": "https://www.youtube.com/watch?v=hWbUlkb5Ms4",
+            "video_url": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
             "instructions": [
-                "Lie on a flat bench with feet firmly planted on the ground",
-                "Grip the bar slightly wider than shoulder width",
-                "Unrack the bar and lower it to your chest with control",
-                "Press the bar back up to starting position",
-                "Keep your wrists straight and elbows tucked"
+                "Lie on bench with feet flat on the ground",
+                "Grip bar slightly wider than shoulder width",
+                "Lower bar to mid-chest with controlled movement",
+                "Press bar back up to starting position",
+                "Keep shoulders retracted throughout movement"
             ],
             "sets": "4",
             "reps": "8-12",
             "rest": "90 sec",
             "tips": [
-                "Keep your back flat on the bench",
-                "Drive through your feet for stability",
-                "Control the weight throughout the movement"
+                "Keep wrists straight and aligned with forearms",
+                "Maintain natural arch in lower back",
+                "Drive through your feet for stability"
             ],
             "common_mistakes": [
-                "Bouncing the bar off chest",
+                "Bouncing bar off chest",
+                "Flaring elbows too wide",
+                "Lifting hips off bench"
+            ]
+        },
+        "Incline Dumbbell Press": {
+            "description": "Targets the upper chest muscles while also engaging shoulders and triceps.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Upper Chest", "Shoulders", "Triceps"],
+            "video_url": "https://www.youtube.com/watch?v=0G2_XV7slIg",
+            "instructions": [
+                "Set bench to 30-45 degree angle",
+                "Hold dumbbells at chest level",
+                "Press weights up until arms are extended",
+                "Lower weights back to chest with control",
+                "Keep core engaged throughout movement"
+            ],
+            "sets": "3-4",
+            "reps": "10-12",
+            "rest": "60 sec",
+            "tips": [
+                "Keep elbows at 45-degree angle",
+                "Maintain neutral wrist position",
+                "Focus on upper chest contraction"
+            ],
+            "common_mistakes": [
+                "Using too much shoulder involvement",
                 "Arching back excessively",
-                "Uneven bar path"
+                "Not maintaining proper elbow angle"
             ]
         }
     },
     "Back": {
         "Pull-Ups": {
-            "description": "A challenging bodyweight exercise that builds upper body strength and muscle definition.",
+            "description": "A challenging bodyweight exercise that builds upper back and lat strength.",
             "difficulty": "Intermediate",
-            "target_muscles": ["Lats", "Biceps", "Upper Back"],
+            "target_muscles": ["Lats", "Upper Back", "Biceps"],
             "video_url": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
             "instructions": [
-                "Hang from a pull-up bar with hands slightly wider than shoulders",
-                "Pull yourself up until your chin is over the bar",
-                "Lower yourself back down with control",
-                "Keep your core engaged throughout"
-            ],
-            "sets": "3",
-            "reps": "6-10",
-            "rest": "90 sec",
-            "tips": [
-                "Start from a dead hang",
-                "Focus on squeezing your shoulder blades",
-                "Use a controlled tempo"
-            ],
-            "common_mistakes": [
-                "Swinging body",
-                "Not completing full range of motion",
-                "Using momentum instead of control"
-            ]
-        },
-        "Bent-Over Rows": {
-            "description": "An exercise that targets the middle back muscles and helps improve posture.",
-            "instructions": [
-                "Bend at hips and knees, keeping back straight",
-                "Hold weight with arms extended",
-                "Pull weight to lower chest",
-                "Lower weight back down with control"
+                "Grip bar slightly wider than shoulder width",
+                "Hang with arms fully extended",
+                "Pull body up until chin clears bar",
+                "Lower back down with control",
+                "Keep core engaged throughout"
             ],
             "sets": "3-4",
             "reps": "8-12",
-            "rest": "60-90 seconds"
+            "rest": "90 sec",
+            "tips": [
+                "Focus on pulling with back muscles",
+                "Keep shoulders down and back",
+                "Maintain hollow body position"
+            ],
+            "common_mistakes": [
+                "Using momentum to swing up",
+                "Not going through full range of motion",
+                "Rounding shoulders forward"
+            ]
+        },
+        "Bent Over Rows": {
+            "description": "A compound exercise that targets the entire back while also engaging biceps and core.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Back", "Biceps", "Core"],
+            "video_url": "https://www.youtube.com/watch?v=G8l_8chR5BE",
+            "instructions": [
+                "Bend at hips and knees, back straight",
+                "Hold barbell with overhand grip",
+                "Pull bar to lower chest",
+                "Lower bar with control",
+                "Keep back straight throughout"
+            ],
+            "sets": "4",
+            "reps": "10-12",
+            "rest": "60 sec",
+            "tips": [
+                "Keep chest up and back flat",
+                "Squeeze shoulder blades together",
+                "Maintain neutral spine"
+            ],
+            "common_mistakes": [
+                "Rounding back",
+                "Using momentum to pull weight",
+                "Not maintaining proper hip hinge"
+            ]
+        },
+        "Lat Pulldowns": {
+            "description": "An effective machine exercise for building lat width and back thickness.",
+            "difficulty": "Beginner",
+            "target_muscles": ["Lats", "Upper Back", "Biceps"],
+            "video_url": "https://www.youtube.com/watch?v=CAwf7n6Luuc",
+            "instructions": [
+                "Sit with thighs under pads",
+                "Grip bar wider than shoulders",
+                "Pull bar down to upper chest",
+                "Control bar back up",
+                "Keep chest up throughout"
+            ],
+            "sets": "3-4",
+            "reps": "12-15",
+            "rest": "60 sec",
+            "tips": [
+                "Focus on pulling with back muscles",
+                "Keep elbows pointed down",
+                "Maintain upright posture"
+            ],
+            "common_mistakes": [
+                "Leaning back too far",
+                "Using momentum",
+                "Not going through full range of motion"
+            ]
         }
     },
     "Legs": {
         "Squats": {
-            "description": "A fundamental lower body exercise that builds strength and muscle in the legs and core.",
-            "difficulty": "Beginner",
-            "target_muscles": ["Quadriceps", "Hamstrings", "Glutes", "Core"],
-            "video_url": "https://www.youtube.com/watch?v=U3HlEF_E9fo",
+            "description": "The king of leg exercises, targeting quads, hamstrings, and glutes while building overall lower body strength.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Quads", "Hamstrings", "Glutes", "Core"],
+            "video_url": "https://www.youtube.com/watch?v=YaXPRqUwItQ",
             "instructions": [
                 "Stand with feet shoulder-width apart",
                 "Keep chest up and core tight",
-                "Lower your body by bending knees and hips",
-                "Keep knees in line with toes",
-                "Return to starting position"
-            ],
-            "sets": "4",
-            "reps": "10-15",
-            "rest": "90 sec",
-            "tips": [
-                "Keep your weight in your heels",
-                "Break at your hips first",
-                "Keep your back straight"
-            ],
-            "common_mistakes": [
-                "Knees caving inward",
-                "Rounding the back",
-                "Not going deep enough"
-            ]
-        }
-    },
-    "Shoulders": {
-        "Military Press": {
-            "description": "A compound exercise that targets the deltoids and builds overall shoulder strength.",
-            "difficulty": "Intermediate",
-            "target_muscles": ["Deltoids", "Trapezius", "Triceps"],
-            "video_url": "https://www.youtube.com/watch?v=2yjwXTZQDDI",
-            "instructions": [
-                "Stand with feet shoulder-width apart",
-                "Hold barbell at shoulder level with palms facing forward",
-                "Press the weight overhead until arms are fully extended",
-                "Lower the weight back to shoulder level with control",
-                "Keep core engaged throughout the movement"
+                "Bend knees and hips to lower down",
+                "Keep knees aligned with toes",
+                "Drive through heels to stand up"
             ],
             "sets": "4",
             "reps": "8-12",
             "rest": "90 sec",
             "tips": [
-                "Keep your wrists straight",
-                "Engage your core throughout",
-                "Avoid leaning back excessively"
+                "Keep weight in heels",
+                "Maintain neutral spine",
+                "Breathe properly throughout"
             ],
             "common_mistakes": [
-                "Arching the back",
-                "Using momentum",
-                "Not fully extending arms"
+                "Knees caving inward",
+                "Rounding back",
+                "Not going deep enough"
+            ]
+        },
+        "Romanian Deadlifts": {
+            "description": "An excellent exercise for hamstrings and glutes, with emphasis on hip hinge movement.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Hamstrings", "Glutes", "Lower Back"],
+            "video_url": "https://www.youtube.com/watch?v=GYhlG5rZpv0",
+            "instructions": [
+                "Stand with feet hip-width apart",
+                "Hold bar with overhand grip",
+                "Hinge at hips, keeping back straight",
+                "Lower bar along legs",
+                "Return to standing position"
+            ],
+            "sets": "3-4",
+            "reps": "10-12",
+            "rest": "90 sec",
+            "tips": [
+                "Keep bar close to body",
+                "Maintain slight knee bend",
+                "Focus on hip hinge movement"
+            ],
+            "common_mistakes": [
+                "Rounding back",
+                "Bending knees too much",
+                "Not maintaining proper hip hinge"
+            ]
+        },
+        "Bulgarian Split Squats": {
+            "description": "A unilateral exercise that builds leg strength and improves balance.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Quads", "Glutes", "Hamstrings"],
+            "video_url": "https://www.youtube.com/watch?v=2C-uNgKwPLE",
+            "instructions": [
+                "Stand facing away from bench",
+                "Place one foot on bench behind you",
+                "Lower body until front thigh is parallel to ground",
+                "Drive through front heel to stand up",
+                "Keep torso upright"
+            ],
+            "sets": "3",
+            "reps": "10-12 each leg",
+            "rest": "60 sec",
+            "tips": [
+                "Keep front knee aligned with toes",
+                "Maintain upright posture",
+                "Focus on controlled movement"
+            ],
+            "common_mistakes": [
+                "Leaning too far forward",
+                "Not going deep enough",
+                "Losing balance"
+            ]
+        }
+    },
+    "Shoulders": {
+        "Overhead Press": {
+            "description": "A compound exercise that builds shoulder strength and size.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Shoulders", "Triceps", "Upper Chest"],
+            "video_url": "https://www.youtube.com/watch?v=2yjwXTZQDDI",
+            "instructions": [
+                "Stand with feet shoulder-width apart",
+                "Hold bar at shoulder level",
+                "Press bar overhead until arms are straight",
+                "Lower bar back to shoulders",
+                "Keep core engaged throughout"
+            ],
+            "sets": "4",
+            "reps": "8-12",
+            "rest": "90 sec",
+            "tips": [
+                "Keep core tight",
+                "Maintain neutral spine",
+                "Breathe properly"
+            ],
+            "common_mistakes": [
+                "Arching back",
+                "Not going through full range of motion",
+                "Using momentum"
             ]
         },
         "Lateral Raises": {
-            "description": "An isolation exercise that targets the lateral deltoids for broader shoulders.",
+            "description": "An isolation exercise that targets the lateral deltoids.",
             "difficulty": "Beginner",
-            "target_muscles": ["Lateral Deltoids", "Trapezius"],
+            "target_muscles": ["Lateral Deltoids"],
             "video_url": "https://www.youtube.com/watch?v=3VcKaXpzqRo",
             "instructions": [
-                "Stand with dumbbells at your sides",
-                "Keep a slight bend in your elbows",
-                "Raise arms out to the sides until parallel with ground",
-                "Lower weights back down with control",
-                "Maintain proper posture throughout"
+                "Stand with dumbbells at sides",
+                "Raise arms out to sides until parallel to ground",
+                "Lower weights with control",
+                "Keep slight bend in elbows",
+                "Maintain upright posture"
             ],
-            "sets": "3",
+            "sets": "3-4",
             "reps": "12-15",
             "rest": "60 sec",
             "tips": [
-                "Lead with your elbows",
-                "Keep shoulders down",
-                "Control the descent"
+                "Keep wrists neutral",
+                "Focus on shoulder movement",
+                "Control the weight"
+            ],
+            "common_mistakes": [
+                "Using momentum",
+                "Raising arms too high",
+                "Shrugging shoulders"
+            ]
+        },
+        "Face Pulls": {
+            "description": "An excellent exercise for rear deltoids and upper back health.",
+            "difficulty": "Beginner",
+            "target_muscles": ["Rear Deltoids", "Upper Back"],
+            "video_url": "https://www.youtube.com/watch?v=rep-qVOkqgk",
+            "instructions": [
+                "Use rope attachment on cable machine",
+                "Pull rope towards face",
+                "Separate hands as you pull",
+                "Squeeze shoulder blades together",
+                "Return to starting position"
+            ],
+            "sets": "3",
+            "reps": "15-20",
+            "rest": "60 sec",
+            "tips": [
+                "Keep elbows high",
+                "Focus on rear deltoid contraction",
+                "Maintain upright posture"
             ],
             "common_mistakes": [
                 "Using too much weight",
-                "Swinging the weights",
-                "Raising above shoulder level"
+                "Not separating hands enough",
+                "Rounding shoulders forward"
             ]
         }
     },
     "Arms": {
         "Bicep Curls": {
-            "description": "A classic isolation exercise for building bicep strength and size.",
+            "description": "A classic isolation exercise for building bicep size and strength.",
             "difficulty": "Beginner",
             "target_muscles": ["Biceps", "Forearms"],
             "video_url": "https://www.youtube.com/watch?v=ykJmrZ5v0Oo",
             "instructions": [
-                "Stand with dumbbells at your sides",
-                "Keep elbows close to your body",
-                "Curl weights up toward shoulders",
-                "Lower weights back down with control",
-                "Maintain straight wrists throughout"
+                "Stand with dumbbells at sides",
+                "Curl weights up towards shoulders",
+                "Lower weights with control",
+                "Keep elbows close to body",
+                "Maintain upright posture"
             ],
-            "sets": "3",
+            "sets": "3-4",
             "reps": "12-15",
             "rest": "60 sec",
             "tips": [
-                "Keep your back straight",
-                "Focus on squeezing biceps",
-                "Use full range of motion"
+                "Keep wrists straight",
+                "Focus on bicep contraction",
+                "Control the negative"
             ],
             "common_mistakes": [
-                "Swinging the body",
-                "Using too much weight",
-                "Not controlling the descent"
+                "Swinging weights",
+                "Moving elbows forward",
+                "Using momentum"
             ]
         },
         "Tricep Pushdowns": {
-            "description": "An effective isolation exercise for developing tricep strength and definition.",
+            "description": "An effective isolation exercise for triceps using a cable machine.",
             "difficulty": "Beginner",
             "target_muscles": ["Triceps"],
             "video_url": "https://www.youtube.com/watch?v=2-LAMcpzODU",
             "instructions": [
-                "Stand facing cable machine with high attachment",
-                "Grab rope or bar at chest level",
-                "Keep elbows at sides and push down",
-                "Extend arms fully and squeeze triceps",
-                "Return to starting position with control"
+                "Stand facing cable machine",
+                "Grip bar with overhand grip",
+                "Push bar down until arms are straight",
+                "Return to starting position",
+                "Keep elbows close to body"
+            ],
+            "sets": "3-4",
+            "reps": "12-15",
+            "rest": "60 sec",
+            "tips": [
+                "Keep elbows stationary",
+                "Focus on tricep contraction",
+                "Maintain upright posture"
+            ],
+            "common_mistakes": [
+                "Moving elbows forward",
+                "Using momentum",
+                "Not going through full range of motion"
+            ]
+        },
+        "Hammer Curls": {
+            "description": "A variation of bicep curls that also targets the forearms.",
+            "difficulty": "Beginner",
+            "target_muscles": ["Biceps", "Forearms"],
+            "video_url": "https://www.youtube.com/watch?v=zC3nLlEvin4",
+            "instructions": [
+                "Stand with dumbbells at sides",
+                "Keep palms facing each other",
+                "Curl weights up towards shoulders",
+                "Lower weights with control",
+                "Keep elbows close to body"
             ],
             "sets": "3",
             "reps": "12-15",
             "rest": "60 sec",
             "tips": [
-                "Keep elbows tucked",
-                "Focus on tricep contraction",
-                "Maintain upright posture"
+                "Maintain neutral grip",
+                "Focus on controlled movement",
+                "Keep wrists straight"
             ],
             "common_mistakes": [
-                "Moving elbows away from body",
-                "Using momentum",
-                "Incomplete range of motion"
+                "Swinging weights",
+                "Moving elbows forward",
+                "Using momentum"
             ]
         }
     },
     "Core": {
         "Plank": {
-            "description": "A fundamental isometric exercise that strengthens the entire core.",
+            "description": "A fundamental core exercise that builds stability and endurance.",
             "difficulty": "Beginner",
-            "target_muscles": ["Abs", "Lower Back", "Obliques"],
-            "video_url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+            "target_muscles": ["Core", "Shoulders", "Glutes"],
+            "video_url": "https://www.youtube.com/watch?v=pSHjTRCQxIw",
             "instructions": [
-                "Start in push-up position on forearms",
-                "Keep body in straight line from head to heels",
+                "Start in push-up position",
+                "Bend elbows to rest on forearms",
+                "Keep body in straight line",
                 "Engage core and glutes",
-                "Hold position for prescribed time",
-                "Breathe steadily throughout"
+                "Hold position"
             ],
             "sets": "3",
             "reps": "30-60 sec",
-            "rest": "45 sec",
+            "rest": "60 sec",
             "tips": [
-                "Keep hips level",
-                "Look at the floor",
-                "Breathe consistently"
+                "Keep neck neutral",
+                "Don't let hips sag",
+                "Breathe steadily"
             ],
             "common_mistakes": [
                 "Sagging hips",
@@ -270,57 +441,83 @@ EXERCISE_DATA = {
             ]
         },
         "Russian Twists": {
-            "description": "A dynamic exercise that targets the obliques and rotational core strength.",
+            "description": "An effective exercise for oblique muscles and core rotation.",
             "difficulty": "Intermediate",
-            "target_muscles": ["Obliques", "Abs", "Hip Flexors"],
+            "target_muscles": ["Obliques", "Core"],
             "video_url": "https://www.youtube.com/watch?v=wkD8rjkodUI",
             "instructions": [
-                "Sit with knees bent and feet off ground",
-                "Lean back slightly, maintaining straight back",
-                "Hold weight at chest level",
-                "Rotate torso side to side",
-                "Touch weight to ground on each side"
+                "Sit on floor with knees bent",
+                "Lean back slightly",
+                "Rotate torso from side to side",
+                "Keep core engaged",
+                "Maintain balance"
             ],
             "sets": "3",
-            "reps": "20 total",
+            "reps": "20-30",
             "rest": "60 sec",
             "tips": [
-                "Keep chest up",
-                "Control the movement",
-                "Engage core throughout"
+                "Keep back straight",
+                "Move slowly and controlled",
+                "Focus on rotation"
             ],
             "common_mistakes": [
-                "Rounding the back",
-                "Moving too quickly",
-                "Not rotating fully"
+                "Using momentum",
+                "Rounding back",
+                "Moving too quickly"
             ]
-        }
-    },
-    "Full Body": {
-        "Burpees": {
-            "description": "A high-intensity full body exercise that builds strength and endurance.",
-            "difficulty": "Intermediate",
-            "target_muscles": ["Legs", "Chest", "Core", "Shoulders"],
-            "video_url": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+        },
+        "Hanging Leg Raises": {
+            "description": "An advanced core exercise that targets lower abs and hip flexors.",
+            "difficulty": "Advanced",
+            "target_muscles": ["Lower Abs", "Hip Flexors"],
+            "video_url": "https://www.youtube.com/watch?v=JB2oyawG9KI",
             "instructions": [
-                "Start standing, then drop into a squat",
-                "Kick feet back to plank position",
-                "Perform a push-up",
-                "Jump feet back to squat",
-                "Jump up explosively with arms overhead"
+                "Hang from pull-up bar",
+                "Raise legs to parallel",
+                "Lower legs with control",
+                "Keep core engaged",
+                "Avoid swinging"
             ],
             "sets": "3",
             "reps": "10-15",
             "rest": "90 sec",
             "tips": [
-                "Keep core tight throughout",
-                "Land softly",
-                "Pace yourself"
+                "Keep legs straight",
+                "Control the movement",
+                "Focus on lower abs"
             ],
             "common_mistakes": [
-                "Poor push-up form",
-                "Not fully extending on jump",
-                "Rushing the movement"
+                "Using momentum",
+                "Bending knees too much",
+                "Swinging body"
+            ]
+        }
+    },
+    "Full Body": {
+        "Burpees": {
+            "description": "A high-intensity exercise that combines strength and cardio.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Full Body", "Cardio"],
+            "video_url": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+            "instructions": [
+                "Start standing",
+                "Drop into push-up position",
+                "Perform push-up",
+                "Jump feet forward",
+                "Jump up with arms overhead"
+            ],
+            "sets": "3",
+            "reps": "10-15",
+            "rest": "60 sec",
+            "tips": [
+                "Maintain proper form",
+                "Land softly",
+                "Keep core engaged"
+            ],
+            "common_mistakes": [
+                "Skipping push-up",
+                "Poor landing form",
+                "Not going through full range"
             ]
         },
         "Turkish Get-Up": {
@@ -329,17 +526,17 @@ EXERCISE_DATA = {
             "target_muscles": ["Shoulders", "Core", "Legs", "Hip Flexors"],
             "video_url": "https://www.youtube.com/watch?v=0bWRPC49-KI",
             "instructions": [
-                "Lie on back holding weight overhead in one arm",
+                "Lie on back holding weight overhead",
                 "Roll to elbow while keeping arm vertical",
                 "Push up to seated position",
                 "Sweep back leg through to half-kneeling",
                 "Stand up while maintaining weight overhead"
             ],
             "sets": "3",
-            "reps": "5-8 per side",
+            "reps": "5-8 each side",
             "rest": "90 sec",
             "tips": [
-                "Keep eyes on the weight",
+                "Keep eyes on weight",
                 "Move slowly and controlled",
                 "Maintain vertical arm"
             ],
@@ -347,6 +544,32 @@ EXERCISE_DATA = {
                 "Losing arm alignment",
                 "Rushing the movement",
                 "Poor weight control"
+            ]
+        },
+        "Kettlebell Swings": {
+            "description": "A dynamic exercise that builds power and endurance.",
+            "difficulty": "Intermediate",
+            "target_muscles": ["Hips", "Core", "Shoulders"],
+            "video_url": "https://www.youtube.com/watch?v=YSxHifyI6s8",
+            "instructions": [
+                "Stand with feet shoulder-width apart",
+                "Hold kettlebell with both hands",
+                "Hinge at hips and swing kettlebell back",
+                "Drive hips forward to swing kettlebell up",
+                "Control the swing back down"
+            ],
+            "sets": "3",
+            "reps": "15-20",
+            "rest": "60 sec",
+            "tips": [
+                "Use hip drive, not arms",
+                "Keep back straight",
+                "Maintain proper breathing"
+            ],
+            "common_mistakes": [
+                "Using arms too much",
+                "Rounding back",
+                "Not using proper hip hinge"
             ]
         }
     }
