@@ -1,7 +1,10 @@
 import streamlit as st
-from utils.db_manager import create_user, verify_user
+from utils.db_manager import create_user, verify_user, DatabaseManager
 
 def app():
+    # Initialize database
+    db_manager = DatabaseManager()
+    
     # Hide Streamlit's default menu and footer
     st.markdown("""
         <style>
@@ -59,13 +62,16 @@ def app():
 
             if submit:
                 if identifier and password:
-                    success, result = verify_user(identifier, password)
-                    if success:
-                        st.session_state.user = result
-                        st.session_state.authenticated = True
-                        st.rerun()
-                    else:
-                        st.error("❌ " + result)
+                    try:
+                        success, result = verify_user(identifier, password)
+                        if success:
+                            st.session_state.user = result
+                            st.session_state.authenticated = True
+                            st.rerun()
+                        else:
+                            st.error("❌ " + result)
+                    except Exception as e:
+                        st.error(f"❌ An error occurred during login: {str(e)}")
                 else:
                     st.error("❌ Please fill in all fields")
 
