@@ -1,7 +1,16 @@
 import streamlit as st
-from importlib import reload
-import config
 import sys
+import os
+
+# Add the parent directory to sys.path to ensure config can be imported
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Import config module
+try:
+    import config
+except ImportError:
+    st.error("Error: Could not import config module. Please ensure config.py exists in the root directory.")
+    st.stop()
 
 def extract_youtube_id(url):
     """Extract YouTube video ID from URL."""
@@ -12,9 +21,10 @@ def extract_youtube_id(url):
     return url
 
 def app():
-    # Reload the config module to get fresh data
-    if "config" in sys.modules:
-        reload(config)
+    # Check if config module exists and has required data
+    if not hasattr(config, 'EXERCISE_DATA'):
+        st.error("Error: EXERCISE_DATA not found in config module.")
+        st.stop()
     
     st.header("Exercise Library")
     
