@@ -345,12 +345,15 @@ def main():
 
         # Main Content Area based on navigation
         if st.session_state.nav_selection == "Home":
-            # Hero Section with personalized welcome
+            # Hero Section
             st.markdown(f"""
-            <div class="hero-section">
+            <div class="hero-section" style="background-image: url('https://img.pikbest.com/origin/10/04/67/06tpIkbEsTUP5.jpg!w700wp');">
+                <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <h1 class="hero-title">Welcome back, {st.session_state.user['name']}!</h1>
-                    <p class="hero-subtitle">Let's continue your journey towards {st.session_state.user['fitness_goal']}</p>
+                    <div class="hero-text">
+                        <h1 class="hero-title">Welcome back, {st.session_state.user['name']}!</h1>
+                        <p class="hero-subtitle">Let's continue your journey towards {st.session_state.user['fitness_goal']}</p>
+                    </div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -360,167 +363,257 @@ def main():
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                if st.button("📝 Plan Workout", use_container_width=True):
+                st.markdown("""
+                    <div class="feature-card" style="background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=400&q=80');">
+                        <div class="feature-content">
+                            <h3>📝 Plan Workout</h3>
+                            <p>Create your personalized workout plan</p>
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+                if st.button("Plan Workout", use_container_width=True):
                     navigate_to("Workout Planner")
                     
             with col2:
-                if st.button("🍎 Log Nutrition", use_container_width=True):
+                st.markdown("""
+                    <div class="feature-card" style="background-image: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=400&q=80');">
+                        <div class="feature-content">
+                            <h3>🍎 Log Nutrition</h3>
+                            <p>Track your daily nutrition intake</p>
+                        </div>
+                    </div>
+                """, unsafe_allow_html=True)
+                if st.button("Log Nutrition", use_container_width=True):
                     navigate_to("Nutrition Tracker")
                     
             with col3:
-                if st.button("📊 Track Progress", use_container_width=True):
-                    navigate_to("Progress Tracking")
-            
-            # About ZFIT Section
-            st.markdown("""
-                <div class="about-section">
-                    <h2>About ZFIT</h2>
-                    <p class="about-subtitle">Your AI-Powered Fitness Journey Companion</p>
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Features Grid
-            col1, col2 = st.columns(2)
-            
-            with col1:
                 st.markdown("""
-                    <div class="feature-card">
-                        <h3>🎯 Smart Workout Planning</h3>
-                        <p>Personalized workout plans tailored to your goals, fitness level, and preferences. 
-                        Our AI analyzes your progress and adjusts your routine for optimal results.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>🍎 Intelligent Nutrition Tracking</h3>
-                        <p>Track your meals, monitor macros, and get personalized nutrition recommendations. 
-                        Our AI helps you make informed food choices aligned with your fitness goals.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>📊 Comprehensive Progress Tracking</h3>
-                        <p>Monitor your weight, body composition, and workout performance over time. 
-                        Visualize your progress with detailed charts and analytics.</p>
+                    <div class="feature-card" style="background-image: url('https://stayfitcentral.com/wp-content/uploads/2024/08/Endura-Best-AI-Personal-Trainer-1400x800.webp');">
+                        <div class="feature-content">
+                            <h3>🤖 AI Coach</h3>
+                            <p>Get personalized fitness guidance</p>
+                        </div>
                     </div>
                 """, unsafe_allow_html=True)
-            
-            with col2:
-                st.markdown("""
-                    <div class="feature-card">
-                        <h3>🤖 AI Coach</h3>
-                        <p>Get instant answers to your fitness questions, form checks, and personalized advice. 
-                        Your virtual fitness coach is available 24/7 to guide your journey.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>📸 Food Vision</h3>
-                        <p>Simply take a photo of your meal to get instant nutritional information. 
-                        Our AI-powered food recognition makes tracking effortless.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <h3>💪 Exercise Library</h3>
-                        <p>Access a comprehensive database of exercises with detailed instructions, 
-                        form videos, and expert tips to ensure proper technique.</p>
-                    </div>
-                """, unsafe_allow_html=True)
-            
-            # Motivational Quotes
+                if st.button("AI Coach", use_container_width=True):
+                    navigate_to("AI Coach")
+
+            # Motivation Section
             st.markdown("""
                 <div class="motivation-section">
-                    <h3>Daily Motivation</h3>
-                    <div class="quote-card">
-                        <p class="quote">"The only bad workout is the one that didn't happen."</p>
-                        <p class="quote-author">- Unknown</p>
+                    <div class="motivation-header">
+                        <h2>Daily Motivation</h2>
+                        <p class="motivation-subtitle">Stay inspired on your fitness journey</p>
                     </div>
-                    <div class="quote-card">
-                        <p class="quote">"Your body can stand almost anything. It's your mind you have to convince."</p>
-                        <p class="quote-author">- Andrew Murphy</p>
+                    <div class="quotes-grid">
+                        <div class="quote-card" style="background-image: url('https://img.freepik.com/premium-vector/only-bad-workout-is-one-that-didnt-happen-inspiring-workout-gym-motivation-quote-illustrat_1085864-300.jpg');">
+                            <div class="quote-overlay"></div>
+                            <div class="quote-content">
+                                <p class="quote">"The only Bad Workout is one that didnt happen."</p>
+                            </div>
+                        </div>
+                        <div class="quote-card" style="background-image: url('https://pbs.twimg.com/media/EGA0itTWsAAtMK6.jpg');">
+                            <div class="quote-overlay"></div>
+                            <div class="quote-content">
+                                <p class="quote">"Your body can stand almost anything. It's your mind you have to convince."</p>
+                            </div>
+                        </div>
+                        <div class="quote-card" style="background-image: url('https://m.media-amazon.com/images/I/51sbnUqevKL._AC_.jpg');">
+                            <div class="quote-overlay"></div>
+                            <div class="quote-content">
+                                <p class="quote">"BELIEVE  DISCIPLINE  STRONG  CONSISTENCY SECRET"</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="quote-card">
-                        <p class="quote">"The difference between the impossible and the possible lies in a person's determination."</p>
-                        <p class="quote-author">- Tommy Lasorda</p>
+                    <div class="motivation-footer">
+                        <div class="motivation-tip">
+                            <div class="tip-icon">💡</div>
+                            <p>Let these powerful images inspire your workout today!</p>
+                        </div>
+                        <div class="motivation-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">7</span>
+                                <span class="stat-label">Days of Consistency</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">21</span>
+                                <span class="stat-label">Days to Form a Habit</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">90</span>
+                                <span class="stat-label">Days to Transform</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             """, unsafe_allow_html=True)
-            
-            # Add CSS for the new sections
+
+            # Update CSS for the motivation section
             st.markdown("""
                 <style>
-                    .about-section {
-                        text-align: center;
-                        margin: 2rem 0;
-                        padding: 2rem;
-                        background: #1E1E1E;
-                        border-radius: 15px;
-                        color: #FFFFFF;
-                        border: 1px solid rgba(76, 154, 255, 0.2);
-                    }
-                    .about-subtitle {
-                        color: #A0A0A0;
-                        font-size: 1.2rem;
-                        margin-top: 0.5rem;
-                    }
-                    .feature-card {
-                        background: #2D2D2D;
-                        border-radius: 10px;
-                        padding: 1.5rem;
-                        margin-bottom: 1rem;
-                        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-                        color: #FFFFFF;
-                        border: 1px solid #3D3D3D;
-                        transition: transform 0.2s ease;
-                    }
-                    .feature-card:hover {
-                        transform: translateY(-5px);
-                        border-color: rgba(76, 154, 255, 0.3);
-                    }
-                    .feature-card h3 {
-                        color: #4c9aff;
-                        margin-bottom: 0.5rem;
-                        font-size: 1.3rem;
-                    }
-                    .feature-card p {
-                        color: #CCCCCC;
-                        line-height: 1.6;
-                    }
                     .motivation-section {
-                        margin: 2rem 0;
-                        padding: 2rem;
-                        background: #1E1E1E;
-                        border-radius: 15px;
+                        margin: 4rem 0;
+                        padding: 3rem;
+                        background: linear-gradient(135deg, #1E1E1E 0%, #2D2D2D 100%);
+                        border-radius: 20px;
                         border: 1px solid rgba(76, 154, 255, 0.2);
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                     }
-                    .motivation-section h3 {
-                        color: #FFFFFF;
+                    .motivation-header {
                         text-align: center;
-                        margin-bottom: 1.5rem;
-                        font-size: 1.4rem;
+                        margin-bottom: 3rem;
+                    }
+                    .motivation-header h2 {
+                        color: #4c9aff;
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        margin-bottom: 0.5rem;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+                    }
+                    .motivation-subtitle {
+                        color: #CCCCCC;
+                        font-size: 1.2rem;
+                        font-style: italic;
+                    }
+                    .quotes-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 2rem;
+                        margin: 2rem 0;
                     }
                     .quote-card {
-                        background: #2D2D2D;
-                        border-left: 4px solid #4c9aff;
-                        padding: 1.5rem;
-                        margin: 1rem 0;
-                        border-radius: 0 10px 10px 0;
-                        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-                        transition: transform 0.2s ease;
+                        position: relative;
+                        height: 400px;
+                        background-size: cover;
+                        background-position: center;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
                     }
                     .quote-card:hover {
-                        transform: translateX(5px);
-                        background: #333333;
+                        transform: translateY(-10px) scale(1.02);
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                    }
+                    .quote-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+                        transition: all 0.3s ease;
+                    }
+                    .quote-card:hover .quote-overlay {
+                        background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
+                    }
+                    .quote-content {
+                        position: relative;
+                        z-index: 1;
+                        padding: 2rem;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        color: white;
+                        text-align: center;
+                        transform: translateY(0);
+                        transition: all 0.3s ease;
+                    }
+                    .quote-card:hover .quote-content {
+                        transform: translateY(-10px);
                     }
                     .quote {
                         font-style: italic;
-                        font-size: 1.1rem;
-                        color: #FFFFFF;
-                        margin-bottom: 0.5rem;
+                        font-size: 1.5rem;
                         line-height: 1.6;
+                        color: #FFFFFF;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                        font-weight: 600;
+                        margin: 0;
+                        padding: 1rem;
+                        background: rgba(0,0,0,0.3);
+                        border-radius: 10px;
+                        backdrop-filter: blur(5px);
                     }
-                    .quote-author {
-                        text-align: right;
+                    .motivation-footer {
+                        margin-top: 3rem;
+                        padding-top: 2rem;
+                        border-top: 1px solid rgba(76, 154, 255, 0.2);
+                    }
+                    .motivation-tip {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 1rem;
+                        background: rgba(76, 154, 255, 0.1);
+                        padding: 1.5rem;
+                        border-radius: 10px;
+                        margin-bottom: 2rem;
+                    }
+                    .tip-icon {
+                        font-size: 2rem;
                         color: #4c9aff;
-                        font-size: 0.9rem;
-                        font-weight: 500;
+                    }
+                    .motivation-tip p {
+                        color: #CCCCCC;
+                        font-size: 1.1rem;
+                        font-style: italic;
+                        margin: 0;
+                    }
+                    .motivation-stats {
+                        display: flex;
+                        justify-content: space-around;
+                        gap: 2rem;
+                        margin-top: 2rem;
+                    }
+                    .stat-item {
+                        text-align: center;
+                        padding: 1.5rem;
+                        background: rgba(255,255,255,0.05);
+                        border-radius: 10px;
+                        transition: transform 0.3s ease;
+                    }
+                    .stat-item:hover {
+                        transform: translateY(-5px);
+                        background: rgba(255,255,255,0.08);
+                    }
+                    .stat-number {
+                        display: block;
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        color: #4c9aff;
+                        margin-bottom: 0.5rem;
+                    }
+                    .stat-label {
+                        color: #CCCCCC;
+                        font-size: 1rem;
+                    }
+
+                    @media (max-width: 768px) {
+                        .motivation-section {
+                            padding: 2rem;
+                            margin: 2rem 0;
+                        }
+                        .motivation-header h2 {
+                            font-size: 2rem;
+                        }
+                        .quotes-grid {
+                            grid-template-columns: 1fr;
+                        }
+                        .quote-card {
+                            height: 300px;
+                        }
+                        .quote {
+                            font-size: 1.2rem;
+                        }
+                        .motivation-stats {
+                            flex-direction: column;
+                            gap: 1rem;
+                        }
+                        .stat-item {
+                            width: 100%;
+                        }
                     }
                 </style>
             """, unsafe_allow_html=True)
