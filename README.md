@@ -49,7 +49,7 @@ ZFIT is an intelligent fitness tracking and planning application that leverages 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Ai_FitnessPlanner.git
+git clone https://github.com/uchiha_byte/Ai_FitnessPlanner.git
 cd Ai_FitnessPlanner
 ```
 
