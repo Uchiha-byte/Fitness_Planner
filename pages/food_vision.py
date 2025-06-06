@@ -174,4 +174,4 @@ def app():
                 st.info("Please try taking a different photo.")
 
 if __name__ == "__main__":
-    app() 
+    app()
