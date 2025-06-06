@@ -808,55 +808,72 @@ div[data-testid="stMarkdownContainer"] > div.success {
 /* User Profile Card */
 .user-profile-card {
     background: var(--card-bg-color);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 12px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     border: 1px solid rgba(76, 154, 255, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
 }
 
 .user-info-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-align: center;
 }
 
 .user-info-header h3 {
     color: var(--primary-color);
-    font-size: 1.5em;
+    font-size: 1.1em;
     margin: 0;
     font-weight: 600;
 }
 
 .user-goal {
     color: var(--secondary-text-color);
-    font-size: 0.9em;
-    margin: 0.5rem 0 0 0;
+    font-size: 0.75em;
+    margin: 0.4rem 0 0 0;
     font-style: italic;
 }
 
 .user-stats {
     display: grid;
+    align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    padding-top: 1rem;
+    gap: 0.3rem;
+    padding-top: 0.6rem;
     border-top: 1px solid rgba(76, 154, 255, 0.1);
+    max-width: 100%;
 }
 
 .stat-item {
     text-align: center;
+    padding: 0.3rem;
+    background: rgba(76, 154, 255, 0.05);
+    border-radius: 6px;
+    min-width: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 .stat-label {
     display: block;
     color: var(--secondary-text-color);
-    font-size: 0.8em;
-    margin-bottom: 0.25rem;
+    font-size: 0.6em;
+    margin-bottom: 0.15rem;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .stat-value {
     color: var(--text-color);
-    font-size: 1.1em;
+    font-size: 0.75em;
     font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
 }
 
 /* Stats Dashboard */
