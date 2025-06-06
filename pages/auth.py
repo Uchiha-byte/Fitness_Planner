@@ -5,11 +5,30 @@ def app():
     # Initialize database
     db_manager = DatabaseManager()
     
-    # Hide Streamlit's default menu and footer
+    # Hide Streamlit's default menu, footer and sidebar
     st.markdown("""
         <style>
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
+        [data-testid="stSidebar"][aria-expanded="true"] {
+            visibility: hidden;
+            width: 0px;
+        }
+        [data-testid="stSidebar"][aria-expanded="false"] {
+            visibility: hidden;
+            width: 0px;
+        }
+        section[data-testid="stSidebar"] {
+            visibility: hidden;
+            width: 0px !important;
+            margin-right: 0px !important;
+        }
+        button[kind="header"] {
+            display: none !important;
+        }
+        .st-emotion-cache-1dp5vir {
+            display: none !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
