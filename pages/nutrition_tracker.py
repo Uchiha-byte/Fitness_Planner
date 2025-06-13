@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 Nutrition Tracker Module
 Handles nutrition tracking and meal planning functionality
 """
-
 import streamlit as st
 import pandas as pd
 from datetime import datetime
