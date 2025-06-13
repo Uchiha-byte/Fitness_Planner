@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 Workout Planner Module
 Handles workout planning and tracking functionality
 """
-
 import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
