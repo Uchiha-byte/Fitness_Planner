@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 AI Coach Module
 Provides AI-powered fitness coaching and guidance
 """
-
 import streamlit as st
 from utils.ai_trainer import AITrainer
 from utils.workout_db import WorkoutDatabase
