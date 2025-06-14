@@ -1,246 +1,158 @@
 import sqlite3
+import hashlib
+import os
+import logging
 from datetime import datetime
 import json
-import hashlib
 import re
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 class DatabaseManager:
     def __init__(self):
-        self.conn = sqlite3.connect('fitness_app.db', check_same_thread=False)
-        self.conn.row_factory = sqlite3.Row
-        self.create_tables()
+        self.db_path = 'fitness_app.db'
+        self.conn = None
+        self._connect()
+        self._create_tables()
+    
+    def _connect(self):
+        """Create a database connection with proper settings"""
+        try:
+            # Ensure the database directory exists
+            db_dir = os.path.dirname(self.db_path)
+            if db_dir and not os.path.exists(db_dir):
+                os.makedirs(db_dir)
+            
+            self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
+            self.conn.row_factory = sqlite3.Row
+            self.conn.execute("PRAGMA foreign_keys = ON")
+            logger.info(f"Connected to database at {self.db_path}")
+        except Exception as e:
+            logger.error(f"Database connection error: {str(e)}")
+            raise
 
-    def create_tables(self):
-        cursor = self.conn.cursor()
-        
-        # Create users table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            name TEXT NOT NULL,
-            email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            height REAL,
-            weight REAL,
-            age INTEGER,
-            gender TEXT,
-            fitness_goal TEXT,
-            activity_level TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        ''')
-        
-        # Create nutrition_logs table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS nutrition_logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            time TEXT,
-            date TEXT,
-            food_name TEXT,
-            meal_type TEXT,
-            serving_size REAL,
-            calories REAL,
-            protein REAL,
-            carbs REAL,
-            fat REAL,
-            fiber REAL,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-        ''')
-        
-        # Create daily_goals table
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS daily_goals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            calories INTEGER,
-            protein REAL,
-            carbs REAL,
-            fat REAL,
-            date_modified TEXT,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-        ''')
-        
-        self.conn.commit()
-
-    def add_food_log(self, log_entry):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-        INSERT INTO nutrition_logs (time, date, food_name, meal_type, serving_size, 
-                                  calories, protein, carbs, fat, fiber)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            log_entry['time'],
-            log_entry['date'].isoformat() if isinstance(log_entry['date'], datetime) else log_entry['date'],
-            log_entry['food_name'],
-            log_entry['meal_type'],
-            log_entry['serving_size'],
-            log_entry['calories'],
-            log_entry['protein'],
-            log_entry['carbs'],
-            log_entry['fat'],
-            log_entry['fiber']
-        ))
-        self.conn.commit()
-
-    def get_logs_by_date(self, date):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-        SELECT * FROM nutrition_logs WHERE date = ?
-        ''', (date.isoformat() if isinstance(date, datetime) else date,))
-        
-        columns = [description[0] for description in cursor.description]
-        logs = []
-        for row in cursor.fetchall():
-            log_dict = dict(zip(columns, row))
-            logs.append(log_dict)
-        return logs
-
-    def clear_logs_by_date(self, date):
-        cursor = self.conn.cursor()
-        cursor.execute('DELETE FROM nutrition_logs WHERE date = ?', 
-                      (date.isoformat() if isinstance(date, datetime) else date,))
-        self.conn.commit()
-
-    def save_daily_goals(self, goals):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-        INSERT OR REPLACE INTO daily_goals (id, calories, protein, carbs, fat, date_modified)
-        VALUES (1, ?, ?, ?, ?, ?)
-        ''', (goals['calories'], goals['protein'], goals['carbs'], goals['fat'], 
-              datetime.now().isoformat()))
-        self.conn.commit()
-
-    def get_daily_goals(self):
-        cursor = self.conn.cursor()
-        cursor.execute('SELECT calories, protein, carbs, fat FROM daily_goals WHERE id = 1')
-        row = cursor.fetchone()
-        if row:
-            return {
-                'calories': row[0],
-                'protein': row[1],
-                'carbs': row[2],
-                'fat': row[3]
-            }
-        return None
+    def _create_tables(self):
+        """Create all required tables if they don't exist"""
+        try:
+            cursor = self.conn.cursor()
+            
+            # Create users table
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                name TEXT NOT NULL,
+                email TEXT,
+                password_hash TEXT NOT NULL,
+                height REAL,
+                weight REAL,
+                age INTEGER,
+                gender TEXT,
+                fitness_goal TEXT,
+                activity_level TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+            ''')
+            
+            # Create other tables...
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS workout_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                workout_type TEXT,
+                duration INTEGER,
+                calories_burned INTEGER,
+                date DATE,
+                notes TEXT,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            )
+            ''')
+            
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS nutrition_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                time TEXT,
+                date TEXT,
+                food_name TEXT,
+                meal_type TEXT,
+                serving_size REAL,
+                calories REAL,
+                protein REAL,
+                carbs REAL,
+                fat REAL,
+                fiber REAL,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            )
+            ''')
+            
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS progress_tracking (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                weight REAL,
+                body_fat REAL,
+                muscle_mass REAL,
+                date DATE,
+                notes TEXT,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            )
+            ''')
+            
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS daily_goals (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                calories INTEGER,
+                protein REAL,
+                carbs REAL,
+                fat REAL,
+                date_modified TEXT,
+                FOREIGN KEY (user_id) REFERENCES users (id)
+            )
+            ''')
+            
+            self.conn.commit()
+            logger.info("Database tables created successfully")
+        except Exception as e:
+            logger.error(f"Error creating tables: {str(e)}")
+            raise
 
     def __del__(self):
-        self.conn.close()
+        """Close database connection"""
+        if self.conn:
+            self.conn.close()
+            logger.info("Database connection closed")
 
-def get_db_connection():
-    """Create a database connection"""
-    conn = sqlite3.connect('fitness_app.db')
-    conn.row_factory = sqlite3.Row
-    return conn
+def get_db():
+    """Get a database connection"""
+    try:
+        conn = sqlite3.connect('fitness_app.db', check_same_thread=False)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON")
+        return conn
+    except Exception as e:
+        logger.error(f"Error creating database connection: {str(e)}")
+        raise
 
-def reset_db():
-    """Drop all tables and recreate them"""
-    conn = get_db_connection()
-    c = conn.cursor()
-    
-    # Drop existing tables
-    c.execute('DROP TABLE IF EXISTS nutrition_logs')
-    c.execute('DROP TABLE IF EXISTS workout_logs')
-    c.execute('DROP TABLE IF EXISTS progress_tracking')
-    c.execute('DROP TABLE IF EXISTS users')
-    
-    conn.commit()
-    conn.close()
-    
-    # Reinitialize the database
-    init_db()
-
-def init_db():
-    """Initialize the database with required tables"""
-    conn = get_db_connection()
-    c = conn.cursor()
-    
-    # Create users table with additional fields
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            name TEXT NOT NULL,
-            email TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            height REAL,
-            weight REAL,
-            age INTEGER,
-            gender TEXT,
-            fitness_goal TEXT,
-            activity_level TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
-    
-    # Create workout_logs table
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS workout_logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            workout_type TEXT,
-            duration INTEGER,
-            calories_burned INTEGER,
-            date DATE,
-            notes TEXT,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-    ''')
-    
-    # Create nutrition_logs table if not exists (compatible with old schema)
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS nutrition_logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            time TEXT,
-            date TEXT,
-            food_name TEXT,
-            meal_type TEXT,
-            serving_size REAL,
-            calories REAL,
-            protein REAL,
-            carbs REAL,
-            fat REAL,
-            fiber REAL,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-    ''')
-    
-    # Create progress_tracking table
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS progress_tracking (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            weight REAL,
-            body_fat REAL,
-            muscle_mass REAL,
-            date DATE,
-            notes TEXT,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-    ''')
-    
-    # Create daily_goals table if not exists
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS daily_goals (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
-            calories INTEGER,
-            protein REAL,
-            carbs REAL,
-            fat REAL,
-            date_modified TEXT,
-            FOREIGN KEY (user_id) REFERENCES users (id)
-        )
-    ''')
-    
-    conn.commit()
-    conn.close()
+def reset_database():
+    """Reset the database by removing the file and recreating it"""
+    try:
+        # Close any existing connections
+        if os.path.exists('fitness_app.db'):
+            os.remove('fitness_app.db')
+            logger.info("Removed existing database file")
+        
+        # Create new database
+        db = DatabaseManager()
+        logger.info("Database reset complete")
+        return True
+    except Exception as e:
+        logger.error(f"Error resetting database: {str(e)}")
+        return False
 
 def hash_password(password):
     """Hash a password using SHA-256"""
@@ -248,97 +160,159 @@ def hash_password(password):
 
 def validate_username(username):
     """Validate username format"""
+    if not username or not isinstance(username, str):
+        return False, "Username is required"
     if not 3 <= len(username) <= 20:
         return False, "Username must be between 3 and 20 characters"
     if not re.match("^[a-zA-Z0-9_-]+$", username):
         return False, "Username can only contain letters, numbers, underscores, and hyphens"
     return True, "Valid username"
 
-def create_user(username, name, email, password, weight=None, height=None, age=None, 
+def create_user(username, name, password, email=None, weight=None, height=None, age=None, 
                 gender=None, fitness_goal=None, activity_level=None):
-    # Validate username
-    is_valid, message = validate_username(username)
-    if not is_valid:
-        return False, message
-
-    conn = get_db_connection()
-    c = conn.cursor()
+    """
+    Create a new user with proper validation and error handling
+    Returns: (success: bool, message: str)
+    """
+    logger.info(f"Attempting to create user: {username}")
+    
+    # Input validation
+    if not username or not isinstance(username, str):
+        return False, "Username is required"
+    if not 3 <= len(username) <= 20:
+        return False, "Username must be between 3 and 20 characters"
+    if not username.replace('-', '').replace('_', '').isalnum():
+        return False, "Username can only contain letters, numbers, hyphens, and underscores"
+    
+    if not name or not isinstance(name, str):
+        return False, "Name is required"
+    
+    if not password or not isinstance(password, str):
+        return False, "Password is required"
+    if len(password) < 6:
+        return False, "Password must be at least 6 characters long"
+    
+    conn = None
     try:
+        conn = get_db()
+        cursor = conn.cursor()
+        
         # Check if username exists
-        c.execute('SELECT id FROM users WHERE username = ?', (username,))
-        if c.fetchone():
+        cursor.execute('SELECT id FROM users WHERE username = ?', (username,))
+        if cursor.fetchone():
             return False, "Username already exists"
-
-        # Check if email exists
-        c.execute('SELECT id FROM users WHERE email = ?', (email,))
-        if c.fetchone():
-            return False, "Email already exists"
-
-        password_hash = hash_password(password)
-        c.execute('''
-            INSERT INTO users 
-            (username, name, email, password, weight, height, age, gender, 
-             fitness_goal, activity_level)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (username, name, email, password_hash, weight, height, age, gender, 
-              fitness_goal, activity_level))
-        conn.commit()
-        return True, "User created successfully"
+        
+        # Create user with transaction
+        try:
+            conn.execute("BEGIN TRANSACTION")
+            
+            # Hash password
+            password_hash = hash_password(password)
+            
+            # Insert user
+            cursor.execute('''
+                INSERT INTO users (
+                    username, name, email, password_hash,
+                    height, weight, age, gender,
+                    fitness_goal, activity_level
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                username, name, email, password_hash,
+                height, weight, age, gender,
+                fitness_goal, activity_level
+            ))
+            
+            user_id = cursor.lastrowid
+            
+            # Verify user was created
+            cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+            if not cursor.fetchone():
+                raise Exception("User creation verification failed")
+            
+            conn.commit()
+            logger.info(f"Successfully created user: {username} (ID: {user_id})")
+            return True, "Account created successfully"
+            
+        except Exception as e:
+            conn.rollback()
+            logger.error(f"Error during user creation: {str(e)}")
+            raise
+            
     except sqlite3.IntegrityError as e:
-        if "username" in str(e):
-            return False, "Username already exists"
-        elif "email" in str(e):
-            return False, "Email already exists"
-        return False, "An error occurred while creating user"
+        if conn:
+            conn.rollback()
+        logger.error(f"Database integrity error: {str(e)}")
+        return False, "Username already exists"
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        logger.error(f"Error creating user: {str(e)}")
+        return False, f"Error creating account: {str(e)}"
     finally:
-        conn.close()
+        if conn:
+            conn.close()
 
-def verify_user(identifier, password):
+def verify_user(username, password):
     """
-    Verify user using either email or username
-    :param identifier: email or username
-    :param password: user password
-    :return: (success, result) tuple
+    Verify user credentials
+    Returns: (success: bool, result: dict or str)
     """
-    conn = get_db_connection()
-    c = conn.cursor()
-    password_hash = hash_password(password)
+    logger.info(f"Verifying user: {username}")
     
-    # Try to find user by email or username
-    c.execute('''
-        SELECT * FROM users 
-        WHERE (email = ? OR username = ?) AND password = ?
-    ''', (identifier, identifier, password_hash))
+    if not username or not password:
+        return False, "Username and password are required"
     
-    user = c.fetchone()
-    conn.close()
-    
-    if user:
-        return True, dict(user)
-    return False, "Invalid credentials"
+    conn = None
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        
+        # Get user
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        user = cursor.fetchone()
+        
+        if not user:
+            logger.info(f"No user found with username: {username}")
+            return False, "Invalid username or password"
+        
+        # Verify password
+        if user['password_hash'] != hash_password(password):
+            logger.info(f"Password verification failed for user: {username}")
+            return False, "Invalid username or password"
+        
+        # Return user data without sensitive information
+        user_dict = dict(user)
+        user_dict.pop('password_hash', None)
+        logger.info(f"Successfully verified user: {username}")
+        return True, user_dict
+        
+    except Exception as e:
+        logger.error(f"Error verifying user: {str(e)}")
+        return False, f"Error during verification: {str(e)}"
+    finally:
+        if conn:
+            conn.close()
 
 def get_user_by_id(user_id):
-    """Get user details by ID"""
-    conn = get_db_connection()
-    c = conn.cursor()
-    
-    c.execute('''
-        SELECT id, username, name, email, height, weight, age, gender, 
-               fitness_goal, activity_level, created_at, updated_at
-        FROM users 
-        WHERE id = ?
-    ''', (user_id,))
-    
-    user = c.fetchone()
-    conn.close()
-    
-    if user:
-        return dict(user)
-    return None
+    """Get user by ID"""
+    conn = None
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+        user = cursor.fetchone()
+        if user:
+            user_dict = dict(user)
+            user_dict.pop('password_hash', None)
+            return user_dict
+        return None
+    finally:
+        if conn:
+            conn.close()
 
 def update_user_profile(user_id, data):
     """Update user profile information"""
-    conn = get_db_connection()
+    conn = get_db()
     c = conn.cursor()
     
     valid_fields = [
@@ -362,12 +336,11 @@ def update_user_profile(user_id, data):
         c.execute(query, values)
         conn.commit()
     
-    conn.close()
     return get_user_by_id(user_id)
 
 def log_workout(user_id, workout_data):
     """Log a workout session"""
-    conn = get_db_connection()
+    conn = get_db()
     c = conn.cursor()
     
     c.execute('''
@@ -388,7 +361,7 @@ def log_workout(user_id, workout_data):
 
 def log_nutrition(user_id, nutrition_data):
     """Log nutrition information"""
-    conn = get_db_connection()
+    conn = get_db()
     c = conn.cursor()
     
     # Support both old and new nutrition logging formats
@@ -434,7 +407,7 @@ def log_nutrition(user_id, nutrition_data):
 
 def track_progress(user_id, progress_data):
     """Track user progress metrics"""
-    conn = get_db_connection()
+    conn = get_db()
     c = conn.cursor()
     
     c.execute('''
@@ -455,7 +428,7 @@ def track_progress(user_id, progress_data):
 
 def get_user_stats(user_id):
     """Get user statistics and progress"""
-    conn = get_db_connection()
+    conn = get_db()
     c = conn.cursor()
     
     # Get latest progress tracking
@@ -498,5 +471,27 @@ def get_user_stats(user_id):
         'nutrition': dict(nutrition_summary) if nutrition_summary else None
     }
 
+def get_user_by_username(username):
+    """Get user by username"""
+    logger.info(f"Fetching user by username: {username}")
+    conn = None
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        user = cursor.fetchone()
+        if user:
+            user_dict = dict(user)
+            user_dict.pop('password_hash', None)  # Remove sensitive data
+            return user_dict
+        logger.info(f"No user found with username: {username}")
+        return None
+    except Exception as e:
+        logger.error(f"Error fetching user by username: {str(e)}")
+        return None
+    finally:
+        if conn:
+            conn.close()
+
 # Reset and reinitialize the database when the module is imported
-# reset_db() 
+# reset_database() 
