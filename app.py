@@ -9,7 +9,7 @@ from utils.db_manager import (
     get_user_by_id, 
     update_user_profile, 
     DatabaseManager,
-    get_db_connection,
+    get_db,
     verify_user,
     create_user
 )
@@ -30,7 +30,7 @@ def get_user_summary(user_id):
             return None
         
         # Get recent workout logs
-        conn = get_db_connection()
+        conn = get_db()
         cursor = conn.cursor()
         
         # Get workout logs
