@@ -43,45 +43,68 @@ def app():
     [data-testid="stSidebar"] {visibility: hidden;}
     
     /* Logo styling */
-    .logo-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 3rem;
-        max-width: 300px;
-    }
-    .logo-icon {
-        width: 64px;
-        height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #4A90E2;
-        background: #252b3b;
-        border-radius: 12px;
-        margin-right: 1.25rem;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        flex-shrink: 0;
-    }
-    .logo-text {
+    .main-logo {
+        text-align: center;
+        margin: 2rem auto;
+        padding: 4rem 2rem 2rem 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
+        min-height: 420px;
     }
-    .logo-title {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #4A90E2;
-        letter-spacing: 1px;
-        line-height: 1.2;
-        margin-bottom: 0.25rem;
+    
+    .logo-icon {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Stencil', 'Arial Black', sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        color: #0066CC;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #0066CC, #0099FF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0 auto;
+        border-radius: 20px;
+        background-color: rgba(0, 102, 204, 0.12);
+        box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+        animation: float 3s ease-in-out infinite;
+        text-align: center;
     }
+    
+    .logo-text {
+        font-family: 'Stencil', 'Arial Black', sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        color: #0066CC;
+        margin: 1rem auto;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #0066CC, #0099FF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+    }
+    
     .logo-tagline {
-        font-size: 1rem;
-        color: #8b95a9;
-        line-height: 1.4;
+        font-size: 1.5rem;
+        color: #666;
+        margin: 0.5rem auto;
+        font-weight: 500;
+        text-align: center;
+    }
+    
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0px); }
     }
     
     /* Form header */
@@ -199,14 +222,12 @@ def app():
     </style>
     """, unsafe_allow_html=True)
 
-    # Logo and branding
+    # Show logo only once at the top
     st.markdown("""
-        <div class="logo-container">
+        <div class="main-logo">
             <div class="logo-icon">Z</div>
-            <div class="logo-text">
-                <span class="logo-title">ZFIT</span>
-                <span class="logo-tagline">AI-Powered Fitness</span>
-            </div>
+            <div class="logo-text">ZFIT</div>
+            <div class="logo-tagline">AI-Powered Fitness</div>
         </div>
     """, unsafe_allow_html=True)
 
@@ -244,16 +265,16 @@ def app():
         st.markdown('<h2 class="form-header">Welcome Back!</h2>', unsafe_allow_html=True)
         
         with st.form("login_form"):
-            username = st.text_input("👤 Username")
-            password = st.text_input("🔒 Password", type="password")
+            email = st.text_input("Email", placeholder="Enter your email")
+            password = st.text_input("Password", type="password", placeholder="Enter your password")
             submit = st.form_submit_button("Login →")
             
             if submit:
-                if not username or not password:
+                if not email or not password:
                     st.session_state.auth_error = "❌ Please fill in all fields"
                     st.rerun()
                 
-                success, result = verify_user(username, password)
+                success, result = verify_user(email, password)
                 if success:
                     st.session_state.authenticated = True
                     st.session_state.user = result
@@ -261,7 +282,7 @@ def app():
                     st.session_state.auth_success = "✅ Login successful!"
                     st.rerun()
                 else:
-                    st.session_state.auth_error = "❌ Invalid username or password"
+                    st.session_state.auth_error = "❌ Invalid email or password"
                     st.rerun()
     
     # Signup form
@@ -269,10 +290,8 @@ def app():
         st.markdown('<h2 class="form-header">Create Your Account</h2>', unsafe_allow_html=True)
         
         with st.form("signup_form"):
-            # Personal Information Section
-            st.markdown('<p class="section-title">Personal Information</p>', unsafe_allow_html=True)
+            name = st.text_input("Full Name", placeholder="Enter your full name")
             username = st.text_input("👤 Username", help="Choose a unique username (3-20 characters)")
-            name = st.text_input("📛 Full Name")
             email = st.text_input("📧 Email Address (Optional)")
             password = st.text_input("🔒 Password", type="password", help="At least 6 characters")
             password_confirm = st.text_input("🔒 Confirm Password", type="password")

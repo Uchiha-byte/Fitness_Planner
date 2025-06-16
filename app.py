@@ -215,6 +215,122 @@ def main():
     # Load CSS file
     load_css('static/css/style.css')
 
+    # Custom CSS for the entire app
+    st.markdown("""
+        <style>
+            /* Main Logo Styles */
+            .main-logo {
+                text-align: center;
+                margin: 2rem 0;
+                padding: 2rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+            
+            .logo-icon {
+                font-family: 'Stencil', 'Arial Black', sans-serif;
+                font-size: 8rem;
+                font-weight: 900;
+                color: #0066CC;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                background: linear-gradient(135deg, #0066CC, #0099FF);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin: 0;
+                padding: 20px;
+                border-radius: 20px;
+                background-color: rgba(0, 102, 204, 0.1);
+                box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+                animation: float 3s ease-in-out infinite;
+            }
+            
+            .logo-text {
+                font-family: 'Stencil', 'Arial Black', sans-serif;
+                font-size: 4rem;
+                font-weight: 900;
+                color: #0066CC;
+                margin: 1rem 0;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                background: linear-gradient(135deg, #0066CC, #0099FF);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            
+            .logo-tagline {
+                font-size: 1.5rem;
+                color: #666;
+                margin: 0.5rem 0;
+                font-weight: 500;
+            }
+            
+            /* Sidebar Logo Styles */
+            .sidebar-logo {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                padding: 20px 0;
+                margin-bottom: 20px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .sidebar-logo .logo-icon {
+                width: 90px;
+                height: 90px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Stencil', 'Arial Black', sans-serif;
+                font-size: 3.5rem;
+                font-weight: 900;
+                color: #0066CC;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                background: linear-gradient(135deg, #0066CC, #0099FF);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                border-radius: 20px;
+                background-color: rgba(0, 102, 204, 0.12);
+                box-shadow: 0 4px 15px rgba(0, 102, 204, 0.2);
+                animation: float 3s ease-in-out infinite;
+                margin: 0 auto;
+                text-align: center;
+            }
+            
+            .sidebar-logo .logo-text {
+                font-family: 'Stencil', 'Arial Black', sans-serif;
+                font-size: 1.5rem;
+                font-weight: 900;
+                color: #0066CC;
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                background: linear-gradient(135deg, #0066CC, #0099FF);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-align: center;
+            }
+            
+            .sidebar-logo .logo-tagline {
+                font-size: 1rem;
+                color: #666;
+                margin: 0;
+                font-weight: 500;
+                text-align: center;
+            }
+            
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-5px); }
+                100% { transform: translateY(0px); }
+            }
+            
+            /* Rest of your existing styles */
+            // ... existing code ...
+        </style>
+    """, unsafe_allow_html=True)
+
     # Check authentication
     if not st.session_state.authenticated:
         auth_app()
@@ -231,11 +347,12 @@ def main():
         # Sidebar with Logo and User Info
         with st.sidebar:
             st.markdown("""
-                <div class="zfit-logo">
-                    <h1 class="zfit-title">ZFIT</h1>
-                    <div class="zfit-divider"></div>
-                    <p class="zfit-slogan">Transform Your Life</p>
-                    <p class="zfit-subtitle">AI-Powered Fitness & Nutrition Coach</p>
+                <div class="sidebar-logo">
+                    <div class="logo-icon">Z</div>
+                    <div class="logo-text">
+                        <h1 class="logo-title">ZFIT</h1>
+                        <p class="logo-tagline">AI-Powered Fitness</p>
+                    </div>
                 </div>
             """, unsafe_allow_html=True)
             
