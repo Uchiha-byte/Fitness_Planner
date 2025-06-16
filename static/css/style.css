@@ -113,7 +113,12 @@ a.st-emotion-cache-17db24x.edtmxes5 {
     align-items: flex-start;
 }
 
+h1.logo-title.ai-style-change-1 {
+    font-family: "Stencil", "Arial Black", sans-serif;
+  }
+  
 .logo-title {
+    font-family: 'Stencil', 'Arial Black', sans-serif;
     font-size: 24px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -766,6 +771,26 @@ div[data-testid="stMarkdownContainer"] > div.success {
     border-radius: 10px;
     margin-bottom: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: logoFadeIn 1s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.zfit-logo::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(76, 154, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
 }
 
 .zfit-title {
@@ -779,6 +804,20 @@ div[data-testid="stMarkdownContainer"] > div.success {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
+    animation: titleSlideIn 0.8s ease-out;
+    position: relative;
+}
+
+.zfit-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4c9aff, transparent);
+    animation: lineExpand 1s ease-out 0.5s forwards;
+    transform: scaleX(0);
 }
 
 .zfit-slogan {
@@ -787,6 +826,7 @@ div[data-testid="stMarkdownContainer"] > div.success {
     margin: 0.5rem 0;
     font-style: italic;
     font-weight: 500;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
 .zfit-divider {
@@ -796,6 +836,9 @@ div[data-testid="stMarkdownContainer"] > div.success {
     width: 80%;
     border-radius: 2px;
     opacity: 0.5;
+    animation: expandWidth 1s ease-out 0.2s forwards;
+    transform: scaleX(0);
+    transform-origin: center;
 }
 
 .zfit-subtitle {
@@ -803,6 +846,68 @@ div[data-testid="stMarkdownContainer"] > div.success {
     font-size: 0.9em;
     margin-top: 0.5rem;
     font-weight: 400;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+/* Logo Animations */
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titleSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes expandWidth {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+@keyframes lineExpand {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* User Profile Card */
