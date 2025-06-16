@@ -127,6 +127,99 @@ class DatabaseManager:
             self.conn.close()
             logger.info("Database connection closed")
 
+    def get_daily_goals(self):
+        """Get daily nutrition goals"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''
+                SELECT calories, protein, carbs, fat 
+                FROM daily_goals 
+                ORDER BY date_modified DESC 
+                LIMIT 1
+            ''')
+            result = cursor.fetchone()
+            if result:
+                return dict(result)
+            return None
+        except Exception as e:
+            logger.error(f"Error getting daily goals: {str(e)}")
+            return None
+
+    def save_daily_goals(self, goals):
+        """Save daily nutrition goals"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''
+                INSERT INTO daily_goals 
+                (calories, protein, carbs, fat, date_modified)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (
+                goals['calories'],
+                goals['protein'],
+                goals['carbs'],
+                goals['fat'],
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            ))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            logger.error(f"Error saving daily goals: {str(e)}")
+            return False
+
+    def add_food_log(self, log_entry):
+        """Add a food log entry"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''
+                INSERT INTO nutrition_logs 
+                (time, date, food_name, meal_type, serving_size, calories, protein, carbs, fat, fiber)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                log_entry['time'],
+                log_entry['date'],
+                log_entry['food_name'],
+                log_entry['meal_type'],
+                log_entry['serving_size'],
+                log_entry['calories'],
+                log_entry['protein'],
+                log_entry['carbs'],
+                log_entry['fat'],
+                log_entry['fiber']
+            ))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            logger.error(f"Error adding food log: {str(e)}")
+            return False
+
+    def get_logs_by_date(self, date):
+        """Get nutrition logs for a specific date"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''
+                SELECT * FROM nutrition_logs 
+                WHERE date = ? 
+                ORDER BY time
+            ''', (date,))
+            return [dict(row) for row in cursor.fetchall()]
+        except Exception as e:
+            logger.error(f"Error getting logs by date: {str(e)}")
+            return []
+
+    def clear_logs_by_date(self, date):
+        """Clear nutrition logs for a specific date"""
+        try:
+            cursor = self.conn.cursor()
+            cursor.execute('''
+                DELETE FROM nutrition_logs 
+                WHERE date = ?
+            ''', (date,))
+            self.conn.commit()
+            return True
+        except Exception as e:
+            logger.error(f"Error clearing logs by date: {str(e)}")
+            return False
+
 def get_db():
     """Get a database connection"""
     try:
